@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Clone - Test Page</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .test-panel {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: white;
+            border: 2px solid #1877f2;
+            border-radius: 8px;
+            padding: 16px;
+            max-width: 300px;
+            z-index: 10000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .test-panel h3 {
+            color: #1877f2;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .test-panel button {
+            background: #1877f2;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 4px;
+            font-size: 14px;
+        }
+
+        .test-panel button:hover {
+            background: #166fe5;
+        }
+
+        .test-console {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Test Panel -->
+    <div class="test-panel">
+        <h3>🧪 Test Panel</h3>
+        <button onclick="runManualTests()">Run Tests</button>
+        <button onclick="testLogin()">Test Login</button>
+        <button onclick="testLogout()">Test Logout</button>
+        <button onclick="clearConsole()">Clear</button>
+        <div id="testConsole" class="test-console"></div>
+    </div>
+
+    <!-- Main Application (same as index.html) -->
+    <div class="container">
+        <!-- Left side - Facebook intro -->
+        <div class="left-section">
+            <div class="facebook-logo">
+                <h1>facebook</h1>
+            </div>
+            <h2 class="tagline">Connect with friends and the world around you on Facebook.</h2>
+            <ul class="features">
+                <li>See photos and updates from friends in News Feed.</li>
+                <li>Share what's new in your life on your Timeline.</li>
+                <li>Find more of what you're looking for with Facebook Search.</li>
+            </ul>
+        </div>
+
+        <!-- Right side - Login form -->
+        <div class="right-section">
+            <div class="login-form-container">
+                <form id="loginForm" class="login-form">
+                    <h2 class="form-title">Log In</h2>
+
+                    <div class="input-group">
+                        <input type="email" id="email" name="email" placeholder="Email or phone number" required
+                            autocomplete="email">
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" placeholder="Password" required
+                            autocomplete="current-password">
+                    </div>
+
+                    <div class="error-message" id="errorMessage"></div>
+
+                    <button type="submit" class="login-btn">Log In</button>
+
+                    <div class="forgot-password">
+                        <a href="#" id="forgotPasswordLink">Forgot password?</a>
+                    </div>
+
+                    <hr class="divider">
+
+                    <button type="button" class="create-account-btn" id="createAccountBtn">
+                        Create new account
+                    </button>
+                </form>
+            </div>
+
+            <div class="page-info">
+                <p><strong>Create a Page</strong> for a celebrity, brand or business.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard (initially hidden) -->
+    <div id="dashboard" class="dashboard hidden">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="facebook-logo-small">facebook</div>
+                    <div class="search-container">
+                        <input type="text" placeholder="Search Facebook" class="search-input">
+                    </div>
+                </div>
+
+                <div class="header-center">
+                    <div class="nav-icons">
+                        <div class="nav-icon active">🏠</div>
+                        <div class="nav-icon">👥</div>
+                        <div class="nav-icon">📺</div>
+                        <div class="nav-icon">🏪</div>
+                        <div class="nav-icon">🎮</div>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <div class="user-info">
+                        <span id="welcomeMessage">Welcome back!</span>
+                        <button id="logoutBtn" class="logout-btn">Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="dashboard-content">
+                <div class="welcome-card">
+                    <h2>🎉 Successfully Logged In!</h2>
+                    <p>Thank you for using our Facebook clone demo.</p>
+                    <p>You have successfully entered your email and password.</p>
+                    <div class="demo-info">
+                        <h3>Demo Features:</h3>
+                        <ul>
+                            <li>✅ Login form validation</li>
+                            <li>✅ Facebook-style UI design</li>
+                            <li>✅ Responsive layout</li>
+                            <li>✅ Login/logout functionality</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <button class="action-btn">📝 Create Post</button>
+                    <button class="action-btn">📷 Add Photo</button>
+                    <button class="action-btn">🎥 Go Live</button>
+                    <button class="action-btn">😊 Add Story</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Test console output
+        function logToTestConsole(message) {
+            const console = document.getElementById('testConsole');
+            if (console) {
+                const time = new Date().toLocaleTimeString();
+                console.innerHTML += `[${time}] ${message}<br>`;
+                console.scrollTop = console.scrollHeight;
+            }
+        }
+
+        // Override console.log for test panel
+        const originalLog = console.log;
+        console.log = function (...args) {
+            originalLog.apply(console, args);
+            logToTestConsole(args.join(' '));
+        };
+
+        const originalError = console.error;
+        console.error = function (...args) {
+            originalError.apply(console, args);
+            logToTestConsole('❌ ' + args.join(' '));
+        };
+
+        // Test functions
+        function runManualTests() {
+            clearConsole();
+            logToTestConsole('🧪 Starting manual tests...');
+
+            // Test 1: Element existence
+            const elements = ['loginForm', 'email', 'password', 'dashboard'];
+            elements.forEach(id => {
+                const el = document.getElementById(id);
+                logToTestConsole(el ? `✅ ${id} found` : `❌ ${id} missing`);
+            });
+
+            // Test 2: CSS loading
+            const container = document.querySelector('.container');
+            const styles = window.getComputedStyle(container);
+            logToTestConsole(`✅ CSS loaded: ${styles.display === 'flex' ? 'Yes' : 'No'}`);
+
+            // Test 3: JavaScript loading
+            logToTestConsole(`✅ JS loaded: ${typeof window.facebookClone !== 'undefined' ? 'Yes' : 'No'}`);
+
+            logToTestConsole('✅ Manual tests completed');
+        }
+
+        function testLogin() {
+            logToTestConsole('🔐 Testing login...');
+            document.getElementById('email').value = 'test@example.com';
+            document.getElementById('password').value = 'test123';
+            logToTestConsole('✅ Test credentials filled');
+            logToTestConsole('👆 Click Login button to test');
+        }
+
+        function testLogout() {
+            if (window.facebookClone && window.facebookClone.isLoggedIn) {
+                logToTestConsole('🚪 Testing logout...');
+                window.facebookClone.handleLogout();
+                logToTestConsole('✅ Logout triggered');
+            } else {
+                logToTestConsole('❌ Not logged in - login first');
+            }
+        }
+
+        function clearConsole() {
+            document.getElementById('testConsole').innerHTML = '';
+        }
+
+        // Auto-run basic tests when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                logToTestConsole('🚀 Facebook Clone Test Page Ready');
+                logToTestConsole('👆 Click "Run Tests" to start');
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>

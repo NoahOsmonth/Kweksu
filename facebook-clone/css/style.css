@@ -1,0 +1,676 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+    line-height: 1.34;
+}
+
+/* Container and main layout */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Left section - Facebook intro */
+.left-section {
+    flex: 1;
+    max-width: 580px;
+    margin-right: 32px;
+}
+
+.facebook-logo h1 {
+    color: #1877f2;
+    font-size: 64px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    letter-spacing: -2px;
+}
+
+.tagline {
+    font-size: 28px;
+    font-weight: normal;
+    line-height: 32px;
+    margin-bottom: 20px;
+    color: #1c1e21;
+}
+
+.features {
+    list-style: none;
+    font-size: 18px;
+    line-height: 24px;
+    color: #606770;
+}
+
+.features li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.features li::before {
+    content: "•";
+    color: #1877f2;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* Right section - Login form */
+.right-section {
+    flex: 0 0 396px;
+}
+
+.login-form-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 28px;
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    color: #1c1e21;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 17px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    background: #f5f6f7;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #1877f2;
+    background: white;
+    box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+}
+
+.input-group input::placeholder {
+    color: #90949c;
+}
+
+.error-message {
+    color: #e41e3f;
+    font-size: 14px;
+    margin-bottom: 16px;
+    text-align: center;
+    min-height: 20px;
+}
+
+.login-btn {
+    width: 100%;
+    background: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-bottom: 16px;
+}
+
+.login-btn:hover {
+    background: #166fe5;
+}
+
+.login-btn:active {
+    background: #1464cc;
+}
+
+.forgot-password {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.forgot-password a {
+    color: #1877f2;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #dadde1;
+    margin: 20px 0;
+}
+
+.create-account-btn {
+    display: block;
+    margin: 0 auto;
+    background: #42b883;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 16px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.create-account-btn:hover {
+    background: #369870;
+}
+
+.page-info {
+    text-align: center;
+    font-size: 14px;
+    color: #1c1e21;
+}
+
+.page-info strong {
+    color: #1c1e21;
+}
+
+.page-info a {
+    color: #1877f2;
+    text-decoration: none;
+}
+
+/* Footer */
+.footer {
+    background: white;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.languages {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 13px;
+    margin-bottom: 8px;
+}
+
+.languages a {
+    color: #8a8d91;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.languages a.current-lang {
+    color: #1c1e21;
+}
+
+.languages a:hover {
+    text-decoration: underline;
+}
+
+.footer-divider {
+    border: none;
+    border-top: 1px solid #dddfe2;
+    margin: 8px 0;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 13px;
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: #8a8d91;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    color: #8a8d91;
+    font-size: 11px;
+    margin-top: 16px;
+}
+
+/* Dashboard styles */
+.dashboard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f0f2f5;
+    z-index: 1000;
+}
+
+.dashboard.hidden {
+    display: none;
+}
+
+.dashboard-header {
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    height: 56px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.facebook-logo-small {
+    color: #1877f2;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-input {
+    width: 240px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 50px;
+    background: #f0f2f5;
+    font-size: 15px;
+}
+
+.search-input::placeholder {
+    color: #65676b;
+}
+
+.header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.2s;
+}
+
+.nav-icon:hover {
+    background: #f0f2f5;
+}
+
+.nav-icon.active {
+    background: #e7f3ff;
+    color: #1877f2;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#welcomeMessage {
+    font-weight: 600;
+    color: #1c1e21;
+}
+
+.logout-btn {
+    background: #1877f2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.logout-btn:hover {
+    background: #166fe5;
+}
+
+.dashboard-main {
+    padding: 20px;
+}
+
+.dashboard-content {
+    max-width: 590px;
+    margin: 0 auto;
+}
+
+.welcome-card {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.welcome-card h2 {
+    color: #1c1e21;
+    margin-bottom: 16px;
+    font-size: 24px;
+}
+
+.welcome-card p {
+    color: #65676b;
+    margin-bottom: 12px;
+    font-size: 16px;
+}
+
+.demo-info {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.demo-info h3 {
+    color: #1c1e21;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.demo-info ul {
+    list-style: none;
+    color: #65676b;
+}
+
+.demo-info li {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.quick-actions {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.quick-actions h3 {
+    color: #1c1e21;
+    margin-bottom: 16px;
+    font-size: 18px;
+}
+
+.action-btn {
+    display: block;
+    width: 100%;
+    background: #f0f2f5;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    text-align: left;
+}
+
+.action-btn:hover {
+    background: #e4e6ea;
+}
+
+.action-btn:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .left-section {
+        margin-right: 0;
+        margin-bottom: 40px;
+        max-width: none;
+    }
+
+    .facebook-logo h1 {
+        font-size: 48px;
+    }
+
+    .tagline {
+        font-size: 24px;
+    }
+
+    .right-section {
+        flex: none;
+        width: 100%;
+        max-width: 396px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .facebook-logo h1 {
+        font-size: 40px;
+    }
+
+    .tagline {
+        font-size: 20px;
+        line-height: 28px;
+    }
+
+    .features {
+        font-size: 16px;
+    }
+
+    .login-form-container {
+        padding: 16px;
+    }
+
+    .header-content {
+        padding: 0 8px;
+    }
+
+    .search-input {
+        width: 180px;
+    }
+
+    .nav-icons {
+        gap: 10px;
+    }
+
+    .nav-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .dashboard-content {
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .right-section {
+        max-width: none;
+    }
+
+    .login-form-container {
+        padding: 12px;
+        margin-bottom: 20px;
+    }
+
+    .input-group input {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+
+    .login-btn {
+        padding: 12px 14px;
+        font-size: 18px;
+    }
+
+    .create-account-btn {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+
+    .footer {
+        padding: 16px;
+    }
+
+    .languages,
+    .footer-links {
+        gap: 6px 10px;
+    }
+
+    .header-left {
+        gap: 8px;
+    }
+
+    .search-input {
+        width: 140px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .facebook-logo-small {
+        font-size: 24px;
+    }
+
+    .user-info {
+        gap: 8px;
+    }
+
+    #welcomeMessage {
+        display: none;
+    }
+}
+
+/* Loading and transition effects */
+.login-btn:disabled {
+    background: #e4e6ea;
+    color: #bcc0c4;
+    cursor: not-allowed;
+}
+
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.slide-up {
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.4s ease-out forwards;
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Form validation styles */
+.input-group input.error {
+    border-color: #e41e3f;
+    background: #ffebee;
+}
+
+.input-group input.success {
+    border-color: #42b883;
+    background: #f0fff4;
+}
+
+/* Accessibility improvements */
+.login-btn:focus,
+.create-account-btn:focus,
+.logout-btn:focus {
+    outline: 2px solid #1877f2;
+    outline-offset: 2px;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #1877f2;
+    box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .login-btn {
+        border: 2px solid #1877f2;
+    }
+
+    .create-account-btn {
+        border: 2px solid #42b883;
+    }
+
+    .input-group input {
+        border-width: 2px;
+    }
+}

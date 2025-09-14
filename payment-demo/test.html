@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecurePay - Test Page</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .test-panel {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: white;
+            border: 2px solid #0066cc;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 350px;
+            z-index: 10000;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .test-panel h3 {
+            color: #0066cc;
+            margin-bottom: 16px;
+            font-size: 18px;
+        }
+
+        .test-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .test-btn {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .test-btn:hover {
+            background: #0052a3;
+            transform: translateY(-1px);
+        }
+
+        .test-btn.secondary {
+            background: #6c757d;
+        }
+
+        .test-btn.secondary:hover {
+            background: #5a6268;
+        }
+
+        .test-console {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .test-cards {
+            margin: 12px 0;
+            font-size: 12px;
+        }
+
+        .test-cards h4 {
+            margin: 0 0 8px 0;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .card-number {
+            font-family: 'Courier New', monospace;
+            background: #f0f2f5;
+            padding: 4px 6px;
+            border-radius: 3px;
+            margin: 2px 0;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Test Panel -->
+    <div class="test-panel">
+        <h3>🧪 SecurePay Test Suite</h3>
+
+        <div class="test-buttons">
+            <button class="test-btn" onclick="fillDemoData()">Fill Demo Data</button>
+            <button class="test-btn" onclick="testValidation()">Test Validation</button>
+            <button class="test-btn" onclick="testCardTypes()">Test Card Types</button>
+            <button class="test-btn" onclick="testResponsive()">Test Mobile</button>
+            <button class="test-btn secondary" onclick="resetAll()">Reset All</button>
+            <button class="test-btn secondary" onclick="clearConsole()">Clear Console</button>
+        </div>
+
+        <div class="test-cards">
+            <h4>Test Card Numbers:</h4>
+            <span class="card-number">4111 1111 1111 1111</span>
+            <span class="card-number">5555 5555 5555 4444</span>
+            <span class="card-number">3782 8224 6310 005</span>
+            <span class="card-number">6011 1111 1111 1117</span>
+        </div>
+
+        <div id="testConsole" class="test-console"></div>
+    </div>
+
+    <!-- Include the main payment page content -->
+    <div class="page-container">
+        <!-- Security Header -->
+        <header class="security-header">
+            <div class="security-badges">
+                <span class="badge ssl-badge">
+                    <i class="icon-lock">🔒</i>
+                    SSL Encrypted
+                </span>
+                <span class="badge pci-badge">
+                    <i class="icon-shield">🛡️</i>
+                    PCI Compliant
+                </span>
+                <span class="badge verified-badge">
+                    <i class="icon-check">✓</i>
+                    Verified Secure
+                </span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Logo and Title -->
+            <div class="brand-section">
+                <div class="logo">
+                    <span class="logo-icon">💳</span>
+                    <h1>SecurePay</h1>
+                </div>
+                <p class="tagline">Fast, secure, and trusted payment processing (TEST MODE)</p>
+            </div>
+
+            <!-- Payment Form Container -->
+            <div class="payment-container">
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    <div class="order-item">
+                        <span class="item-name">Premium Service Plan</span>
+                        <span class="item-price">$29.99</span>
+                    </div>
+                    <div class="order-item">
+                        <span class="item-name">Processing Fee</span>
+                        <span class="item-price">$1.50</span>
+                    </div>
+                    <hr class="order-divider">
+                    <div class="order-total">
+                        <span class="total-label">Total</span>
+                        <span class="total-amount">$31.49</span>
+                    </div>
+
+                    <!-- Payment Methods Accepted -->
+                    <div class="payment-methods">
+                        <h3>We Accept</h3>
+                        <div class="card-logos">
+                            <div class="card-logo visa" title="Visa">💳</div>
+                            <div class="card-logo mastercard" title="Mastercard">💳</div>
+                            <div class="card-logo amex" title="American Express">💳</div>
+                            <div class="card-logo discover" title="Discover">💳</div>
+                            <div class="card-logo jcb" title="JCB">💳</div>
+                            <div class="card-logo dinersclub" title="Diners Club">💳</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Form -->
+                <div class="payment-form-container">
+                    <form id="paymentForm" class="payment-form" novalidate>
+                        <h2>Payment Information</h2>
+
+                        <!-- Card Number -->
+                        <div class="form-group">
+                            <label for="cardNumber" class="form-label">
+                                Card Number
+                                <span class="required">*</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456"
+                                    maxlength="19" autocomplete="cc-number" required>
+                                <div class="card-type-indicator" id="cardTypeIndicator">
+                                    <span class="card-type-icon" id="cardTypeIcon">💳</span>
+                                </div>
+                            </div>
+                            <div class="field-error" id="cardNumberError"></div>
+                        </div>
+
+                        <!-- Cardholder Name -->
+                        <div class="form-group">
+                            <label for="cardholderName" class="form-label">
+                                Cardholder Name
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" id="cardholderName" name="cardholderName" placeholder="John Doe"
+                                autocomplete="cc-name" required>
+                            <div class="field-error" id="cardholderNameError"></div>
+                        </div>
+
+                        <!-- Expiry Date and CVV -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiryDate" class="form-label">
+                                    Expiry Date
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5"
+                                    autocomplete="cc-exp" required>
+                                <div class="field-error" id="expiryDateError"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cvv" class="form-label">
+                                    CVV
+                                    <span class="required">*</span>
+                                    <span class="cvv-help" id="cvvHelp" title="3-4 digit security code">?</span>
+                                </label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4"
+                                    autocomplete="cc-csc" required>
+                                <div class="field-error" id="cvvError"></div>
+                            </div>
+                        </div>
+
+                        <!-- Billing Address -->
+                        <div class="billing-section">
+                            <h3>Billing Address</h3>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">
+                                    Email Address
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="email" id="email" name="email" placeholder="john@example.com"
+                                    autocomplete="email" required>
+                                <div class="field-error" id="emailError"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address" class="form-label">
+                                    Street Address
+                                    <span class="required">*</span>
+                                </label>
+                                <input type="text" id="address" name="address" placeholder="123 Main Street"
+                                    autocomplete="street-address" required>
+                                <div class="field-error" id="addressError"></div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="city" class="form-label">
+                                        City
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="city" name="city" placeholder="New York"
+                                        autocomplete="address-level2" required>
+                                    <div class="field-error" id="cityError"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="state" class="form-label">
+                                        State
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="state" name="state" placeholder="NY"
+                                        autocomplete="address-level1" required>
+                                    <div class="field-error" id="stateError"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="zipCode" class="form-label">
+                                        ZIP Code
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="zipCode" name="zipCode" placeholder="10001"
+                                        autocomplete="postal-code" required>
+                                    <div class="field-error" id="zipCodeError"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Options -->
+                        <div class="security-options">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="saveCard" name="saveCard">
+                                <label for="saveCard">
+                                    Save card for future purchases (secure vault storage)
+                                </label>
+                            </div>
+
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <label for="newsletter">
+                                    Send me promotional emails and updates
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Form Errors -->
+                        <div class="form-error" id="formError"></div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="pay-button" id="payButton">
+                            <span class="button-text">
+                                <span class="lock-icon">🔒</span>
+                                Pay $31.49 Securely
+                            </span>
+                            <div class="button-loading" id="buttonLoading">
+                                <div class="spinner"></div>
+                                Processing...
+                            </div>
+                        </button>
+
+                        <!-- Security Note -->
+                        <div class="security-note">
+                            <p>
+                                <span class="security-icon">🔐</span>
+                                Your payment information is encrypted and secure. We never store your card details.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modals (same as main page) -->
+        <div class="modal" id="successModal">
+            <div class="modal-content success-modal">
+                <div class="modal-header">
+                    <span class="success-icon">✅</span>
+                    <h2>Payment Successful!</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Thank you for your payment. Your transaction has been processed successfully.</p>
+                    <div class="transaction-details">
+                        <div class="detail-row">
+                            <span class="detail-label">Transaction ID:</span>
+                            <span class="detail-value" id="transactionId">TXN-123456789</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Amount:</span>
+                            <span class="detail-value">$31.49</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Date:</span>
+                            <span class="detail-value" id="transactionDate"></span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Card:</span>
+                            <span class="detail-value" id="maskedCard">•••• •••• •••• 1234</span>
+                        </div>
+                    </div>
+                    <p class="confirmation-note">
+                        A confirmation email has been sent to your email address.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-primary" id="downloadReceipt">Download Receipt</button>
+                    <button class="btn-secondary" id="newPayment">New Payment</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="errorModal">
+            <div class="modal-content error-modal">
+                <div class="modal-header">
+                    <span class="error-icon">❌</span>
+                    <h2>Payment Failed</h2>
+                </div>
+                <div class="modal-body">
+                    <p id="errorMessage">We're sorry, but your payment could not be processed at this time.</p>
+                    <div class="error-suggestions">
+                        <h4>Please try:</h4>
+                        <ul>
+                            <li>Checking your card details</li>
+                            <li>Ensuring sufficient funds</li>
+                            <li>Contacting your bank</li>
+                            <li>Using a different payment method</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-primary" id="retryPayment">Try Again</button>
+                    <button class="btn-secondary" id="contactSupport">Contact Support</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="cvvModal">
+            <div class="modal-content help-modal">
+                <div class="modal-header">
+                    <h3>What is CVV?</h3>
+                    <button class="close-btn" id="closeCvvModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="cvv-explanation">
+                        <div class="cvv-info">
+                            <h4>Visa, Mastercard, Discover</h4>
+                            <p>3-digit code on the back of your card</p>
+                            <div class="card-visual back">
+                                <div class="magnetic-strip"></div>
+                                <div class="signature-panel">
+                                    <span class="cvv-highlight">123</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cvv-info">
+                            <h4>American Express</h4>
+                            <p>4-digit code on the front of your card</p>
+                            <div class="card-visual front">
+                                <div class="card-number">•••• •••••• •••••</div>
+                                <div class="cvv-highlight amex">1234</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/payment.js"></script>
+    <script>
+        // Test console functions
+        function logToTestConsole(message) {
+            const console = document.getElementById('testConsole');
+            if (console) {
+                const time = new Date().toLocaleTimeString();
+                console.innerHTML += `[${time}] ${message}<br>`;
+                console.scrollTop = console.scrollHeight;
+            }
+        }
+
+        // Override console methods for test panel
+        const originalLog = console.log;
+        console.log = function (...args) {
+            originalLog.apply(console, args);
+            logToTestConsole('ℹ️ ' + args.join(' '));
+        };
+
+        const originalError = console.error;
+        console.error = function (...args) {
+            originalError.apply(console, args);
+            logToTestConsole('❌ ' + args.join(' '));
+        };
+
+        // Test functions
+        function testValidation() {
+            logToTestConsole('🧪 Testing form validation...');
+
+            // Test invalid inputs
+            document.getElementById('cardNumber').value = '1234';
+            document.getElementById('cardholderName').value = '';
+            document.getElementById('expiryDate').value = '01/20';
+            document.getElementById('cvv').value = '12';
+            document.getElementById('email').value = 'invalid-email';
+
+            // Trigger validation
+            window.securePayment.validateAllFields();
+
+            logToTestConsole('✅ Validation test completed');
+        }
+
+        function testCardTypes() {
+            logToTestConsole('💳 Testing card type detection...');
+
+            const cardNumbers = [
+                { number: '4111111111111111', type: 'Visa' },
+                { number: '5555555555554444', type: 'Mastercard' },
+                { number: '378282246310005', type: 'Amex' },
+                { number: '6011111111111117', type: 'Discover' }
+            ];
+
+            const cardInput = document.getElementById('cardNumber');
+
+            cardNumbers.forEach((card, index) => {
+                setTimeout(() => {
+                    cardInput.value = card.number.replace(/(.{4})/g, '$1 ').trim();
+                    cardInput.dispatchEvent(new Event('input'));
+                    logToTestConsole(`${card.type}: ${card.number}`);
+
+                    if (index === cardNumbers.length - 1) {
+                        logToTestConsole('✅ Card type test completed');
+                    }
+                }, index * 1000);
+            });
+        }
+
+        function testResponsive() {
+            logToTestConsole('📱 Testing responsive design...');
+
+            // Simulate mobile viewport
+            const viewport = document.querySelector('meta[name="viewport"]');
+            if (viewport) {
+                logToTestConsole('✅ Viewport meta tag found');
+            }
+
+            // Check CSS media queries
+            if (window.matchMedia('(max-width: 768px)').matches) {
+                logToTestConsole('📱 Mobile layout active');
+            } else {
+                logToTestConsole('🖥️ Desktop layout active');
+            }
+
+            logToTestConsole('✅ Responsive test completed');
+        }
+
+        function resetAll() {
+            if (window.securePayment) {
+                window.securePayment.resetForm();
+                logToTestConsole('🔄 Form reset');
+            }
+        }
+
+        function clearConsole() {
+            document.getElementById('testConsole').innerHTML = '';
+        }
+
+        // Auto-run tests when page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                logToTestConsole('🚀 SecurePay Test Mode Ready');
+                logToTestConsole('💡 Use test buttons to validate features');
+                logToTestConsole('🎯 Fill Demo Data button auto-fills form');
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>

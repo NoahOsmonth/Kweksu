@@ -1,0 +1,5 @@
+<!-- Facebook Clone Favicon (SVG) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+  <rect width="24" height="24" rx="5" fill="#1877f2"/>
+  <path d="M14 8h2v2h-2v8h-3v-8H9V8h2V6.5c0-1.9 1.1-3 3-3h2v2h-2c-.6 0-1 .4-1 1V8z" fill="white"/>
+</svg>

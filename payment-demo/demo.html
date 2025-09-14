@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecurePay Demo - Instructions</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .demo-header {
+            background: linear-gradient(135deg, #0066cc 0%, #003d7a 100%);
+            color: white;
+            padding: 48px 24px;
+            text-align: center;
+        }
+
+        .demo-header h1 {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .demo-header p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .demo-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin: 48px 0;
+        }
+
+        .demo-card {
+            background: white;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e8eaed;
+        }
+
+        .demo-card h3 {
+            color: #0066cc;
+            font-size: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .demo-card .icon {
+            font-size: 24px;
+        }
+
+        .test-cards {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .test-cards h4 {
+            margin: 0 0 16px 0;
+            color: #333;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .card-number {
+            font-family: 'Courier New', monospace;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-weight: 600;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin: 48px 0;
+            flex-wrap: wrap;
+        }
+
+        .demo-btn {
+            background: #0066cc;
+            color: white;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .demo-btn:hover {
+            background: #0052a3;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 102, 204, 0.3);
+        }
+
+        .demo-btn.secondary {
+            background: #6c757d;
+        }
+
+        .demo-btn.secondary:hover {
+            background: #5a6268;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .features-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e8eaed;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            color: #00c851;
+            font-weight: bold;
+        }
+
+        .scenario-steps {
+            list-style: none;
+            padding: 0;
+            margin: 16px 0;
+        }
+
+        .scenario-steps li {
+            background: #f0f2f5;
+            margin: 8px 0;
+            padding: 12px 16px;
+            border-radius: 6px;
+            border-left: 4px solid #0066cc;
+        }
+
+        .scenario-steps li strong {
+            color: #0066cc;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 24px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #0066cc;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Demo Header -->
+    <header class="demo-header">
+        <h1>🔒 SecurePay Demo</h1>
+        <p>Professional Payment Processing Interface - Test & Explore Features</p>
+    </header>
+
+    <div class="demo-container">
+        <!-- Demo Buttons -->
+        <div class="demo-buttons">
+            <a href="index.html" class="demo-btn">
+                🚀 Launch Payment Demo
+            </a>
+            <a href="test.html" class="demo-btn secondary">
+                🧪 Open Test Interface
+            </a>
+        </div>
+
+        <!-- Demo Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">6</span>
+                <div class="stat-label">Card Types Supported</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">15+</span>
+                <div class="stat-label">Validation Rules</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">100%</span>
+                <div class="stat-label">Mobile Responsive</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">2000+</span>
+                <div class="stat-label">Lines of Code</div>
+            </div>
+        </div>
+
+        <!-- Demo Cards Grid -->
+        <div class="demo-grid">
+            <!-- Quick Start -->
+            <div class="demo-card">
+                <h3>
+                    <span class="icon">⚡</span>
+                    Quick Start Guide
+                </h3>
+                <ol class="scenario-steps">
+                    <li><strong>Step 1:</strong> Click "Launch Payment Demo"</li>
+                    <li><strong>Step 2:</strong> Press Ctrl/Cmd + D for auto-fill</li>
+                    <li><strong>Step 3:</strong> Try different card numbers</li>
+                    <li><strong>Step 4:</strong> Submit to see payment flow</li>
+                    <li><strong>Step 5:</strong> Experience success/error states</li>
+                </ol>
+            </div>
+
+            <!-- Test Card Numbers -->
+            <div class="demo-card">
+                <h3>
+                    <span class="icon">💳</span>
+                    Test Card Numbers
+                </h3>
+                <div class="test-cards">
+                    <div class="card-grid">
+                        <strong>Card Type</strong>
+                        <strong>Number</strong>
+                        <strong>CVV</strong>
+                    </div>
+                    <div class="card-grid">
+                        <span>Visa</span>
+                        <span class="card-number">4111 1111 1111 1111</span>
+                        <span>123</span>
+                    </div>
+                    <div class="card-grid">
+                        <span>Mastercard</span>
+                        <span class="card-number">5555 5555 5555 4444</span>
+                        <span>123</span>
+                    </div>
+                    <div class="card-grid">
+                        <span>Amex</span>
+                        <span class="card-number">3782 8224 6310 005</span>
+                        <span>1234</span>
+                    </div>
+                    <div class="card-grid">
+                        <span>Discover</span>
+                        <span class="card-number">6011 1111 1111 1117</span>
+                        <span>123</span>
+                    </div>
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 12px;">
+                    Use any future expiry date (MM/YY format)
+                </p>
+            </div>
+
+            <!-- Key Features -->
+            <div class="demo-card">
+                <h3>
+                    <span class="icon">🎯</span>
+                    Key Features
+                </h3>
+                <ul class="features-list">
+                    <li><span class="check-icon">✓</span> Real-time card type detection</li>
+                    <li><span class="check-icon">✓</span> Live form validation</li>
+                    <li><span class="check-icon">✓</span> Professional UI design</li>
+                    <li><span class="check-icon">✓</span> Mobile responsive layout</li>
+                    <li><span class="check-icon">✓</span> Security indicators</li>
+                    <li><span class="check-icon">✓</span> Payment success/error flows</li>
+                    <li><span class="check-icon">✓</span> Receipt generation</li>
+                    <li><span class="check-icon">✓</span> CVV help modal</li>
+                </ul>
+            </div>
+
+            <!-- Demo Scenarios -->
+            <div class="demo-card">
+                <h3>
+                    <span class="icon">🎬</span>
+                    Demo Scenarios
+                </h3>
+                <h4>✅ Successful Payment</h4>
+                <ol class="scenario-steps">
+                    <li>Use any test card number</li>
+                    <li>Fill all required fields</li>
+                    <li>Submit form (85% success rate)</li>
+                    <li>See success modal with receipt</li>
+                </ol>
+
+                <h4>❌ Payment Failure</h4>
+                <ol class="scenario-steps">
+                    <li>Complete form with valid data</li>
+                    <li>Submit (15% failure rate)</li>
+                    <li>Experience error handling</li>
+                    <li>Try recovery options</li>
+                </ol>
+            </div>
+
+            <!-- Validation Testing -->
+            <div class="demo-card">
+                <h3>
+                    <span class="icon">🔍</span>
+                    Validation Testing
+                </h3>
+                <h4>Test These Scenarios:</h4>
+                <ul class="features-list">
+                    <li><span class="check-icon">•</span> Invalid card numbers</li>
+                    <li><span class="check-icon">•</span> Expired dates (01/20)</li>
+                    <li><span class="check-icon">•</span> Wrong CVV length</li>
+                    <li><span class="check-icon">•</span> Invalid email format</li>
+                    <li><span class="check-icon">•</span> Empty required fields</li>
+                    <li><span class="check-icon">•</span> Invalid ZIP codes</li>
+                </ul>
+                <p style="font-size: 14px; color: #666; margin-top: 12px;">
+                    Watch real-time validation feedback as you type!
+                </p>
+            </div>
+
+            <!-- Testing Tools -->
+            <div class="demo-card">
+                <h3>
+                    <span class="icon">🧪</span>
+                    Testing Tools
+                </h3>
+                <h4>Use Test Page For:</h4>
+                <ul class="features-list">
+                    <li><span class="check-icon">🔧</span> Auto-fill demo data</li>
+                    <li><span class="check-icon">📊</span> Validation testing</li>
+                    <li><span class="check-icon">💳</span> Card type cycling</li>
+                    <li><span class="check-icon">📱</span> Mobile responsive test</li>
+                    <li><span class="check-icon">🔄</span> Form reset</li>
+                    <li><span class="check-icon">📋</span> Console logging</li>
+                </ul>
+                <h4>Keyboard Shortcuts:</h4>
+                <ul style="list-style: none; padding: 0; margin-top: 12px; font-size: 14px;">
+                    <li><code>Ctrl/Cmd + D</code> - Fill demo data</li>
+                    <li><code>Ctrl/Cmd + R</code> - Reset form</li>
+                    <li><code>Escape</code> - Close modals</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Technical Details -->
+        <div class="demo-card" style="grid-column: 1 / -1;">
+            <h3>
+                <span class="icon">⚙️</span>
+                Technical Implementation
+            </h3>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 20px;">
+                <div>
+                    <h4>Frontend Technologies</h4>
+                    <ul class="features-list">
+                        <li><span class="check-icon">📝</span> HTML5 semantic markup</li>
+                        <li><span class="check-icon">🎨</span> CSS3 with Grid & Flexbox</li>
+                        <li><span class="check-icon">⚡</span> Vanilla JavaScript ES6+</li>
+                        <li><span class="check-icon">📱</span> Responsive design</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Payment Features</h4>
+                    <ul class="features-list">
+                        <li><span class="check-icon">🔍</span> Luhn algorithm validation</li>
+                        <li><span class="check-icon">💳</span> Card type auto-detection</li>
+                        <li><span class="check-icon">🔐</span> Input sanitization</li>
+                        <li><span class="check-icon">✅</span> Real-time validation</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Security & UX</h4>
+                    <ul class="features-list">
+                        <li><span class="check-icon">🔒</span> SSL-style indicators</li>
+                        <li><span class="check-icon">♿</span> Accessibility features</li>
+                        <li><span class="check-icon">🎬</span> Smooth animations</li>
+                        <li><span class="check-icon">📄</span> Receipt generation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo Disclaimer -->
+        <div
+            style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 20px; margin: 32px 0; text-align: center;">
+            <h4 style="color: #856404; margin: 0 0 12px 0;">⚠️ Demo Disclaimer</h4>
+            <p style="color: #856404; margin: 0; font-size: 14px;">
+                This is a <strong>demonstration application only</strong>. No real payment processing occurs, no card
+                data is stored or transmitted, and no actual financial transactions take place. All payments are
+                simulated for demonstration purposes.
+            </p>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="demo-buttons">
+            <a href="index.html" class="demo-btn">
+                🚀 Start Payment Demo
+            </a>
+            <a href="test.html" class="demo-btn secondary">
+                🔬 Advanced Testing
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animate statistics
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const value = stat.textContent.replace(/[^\d]/g, '');
+                if (value) {
+                    let count = 0;
+                    const target = parseInt(value);
+                    const increment = target / 50;
+                    const timer = setInterval(() => {
+                        count += increment;
+                        if (count >= target) {
+                            count = target;
+                            clearInterval(timer);
+                        }
+                        stat.textContent = stat.textContent.replace(value, Math.floor(count));
+                    }, 20);
+                }
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.demo-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-4px)';
+                    this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                });
+            });
+
+            console.log('🎯 SecurePay Demo Instructions Loaded');
+            console.log('💡 Ready to explore payment processing features!');
+        });
+    </script>
+</body>
+
+</html>

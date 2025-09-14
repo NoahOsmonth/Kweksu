@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Clone - Connect with friends and the world around you</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left side - Facebook intro -->
+        <div class="left-section">
+            <div class="facebook-logo">
+                <h1>facebook</h1>
+            </div>
+            <h2 class="tagline">Connect with friends and the world around you on Facebook.</h2>
+            <ul class="features">
+                <li>See photos and updates from friends in News Feed.</li>
+                <li>Share what's new in your life on your Timeline.</li>
+                <li>Find more of what you're looking for with Facebook Search.</li>
+            </ul>
+        </div>
+
+        <!-- Right side - Login form -->
+        <div class="right-section">
+            <div class="login-form-container">
+                <form id="loginForm" class="login-form">
+                    <h2 class="form-title">Log In</h2>
+
+                    <div class="input-group">
+                        <input type="email" id="email" name="email" placeholder="Email or phone number" required
+                            autocomplete="email">
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" placeholder="Password" required
+                            autocomplete="current-password">
+                    </div>
+
+                    <div class="error-message" id="errorMessage"></div>
+
+                    <button type="submit" class="login-btn">Log In</button>
+
+                    <div class="forgot-password">
+                        <a href="#" id="forgotPasswordLink">Forgot password?</a>
+                    </div>
+
+                    <hr class="divider">
+
+                    <button type="button" class="create-account-btn" id="createAccountBtn">
+                        Create new account
+                    </button>
+                </form>
+            </div>
+
+            <div class="page-info">
+                <p><strong>Create a Page</strong> for a celebrity, brand or business.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="languages">
+                <a href="#" class="current-lang">English (US)</a>
+                <a href="#">Español</a>
+                <a href="#">Français</a>
+                <a href="#">Deutsch</a>
+                <a href="#">Italiano</a>
+                <a href="#">Português</a>
+                <a href="#">中文(简体)</a>
+                <a href="#">العربية</a>
+                <a href="#">हिन्दी</a>
+                <a href="#">日本語</a>
+                <a href="#">한국어</a>
+            </div>
+
+            <hr class="footer-divider">
+
+            <div class="footer-links">
+                <a href="#">Sign Up</a>
+                <a href="#">Log In</a>
+                <a href="#">Messenger</a>
+                <a href="#">Facebook Lite</a>
+                <a href="#">Watch</a>
+                <a href="#">Places</a>
+                <a href="#">Games</a>
+                <a href="#">Marketplace</a>
+                <a href="#">Meta Pay</a>
+                <a href="#">Meta Store</a>
+                <a href="#">Meta Quest</a>
+                <a href="#">Instagram</a>
+                <a href="#">Threads</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Advertising</a>
+                <a href="#">Ad Choices</a>
+                <a href="#">Cookies</a>
+                <a href="#">More</a>
+            </div>
+
+            <div class="copyright">
+                <p>Meta © 2025</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dashboard (initially hidden) -->
+    <div id="dashboard" class="dashboard hidden">
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="facebook-logo-small">facebook</div>
+                    <div class="search-container">
+                        <input type="text" placeholder="Search Facebook" class="search-input">
+                    </div>
+                </div>
+
+                <div class="header-center">
+                    <div class="nav-icons">
+                        <div class="nav-icon active">🏠</div>
+                        <div class="nav-icon">👥</div>
+                        <div class="nav-icon">📺</div>
+                        <div class="nav-icon">🏪</div>
+                        <div class="nav-icon">🎮</div>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <div class="user-info">
+                        <span id="welcomeMessage">Welcome back!</span>
+                        <button id="logoutBtn" class="logout-btn">Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="dashboard-content">
+                <div class="welcome-card">
+                    <h2>🎉 Successfully Logged In!</h2>
+                    <p>Thank you for using our Facebook clone demo.</p>
+                    <p>You have successfully entered your email and password.</p>
+                    <div class="demo-info">
+                        <h3>Demo Features:</h3>
+                        <ul>
+                            <li>✅ Login form validation</li>
+                            <li>✅ Facebook-style UI design</li>
+                            <li>✅ Responsive layout</li>
+                            <li>✅ Login/logout functionality</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <button class="action-btn">📝 Create Post</button>
+                    <button class="action-btn">📷 Add Photo</button>
+                    <button class="action-btn">🎥 Go Live</button>
+                    <button class="action-btn">😊 Add Story</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

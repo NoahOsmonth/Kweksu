@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Database Test - SecurePay</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .test-form {
+            margin-bottom: 30px;
+            padding: 25px;
+            border: 2px solid #ff6b6b;
+            border-radius: 12px;
+            background: #fff5f5;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            border-color: #ff6b6b;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+        }
+
+        button {
+            background: #ff6b6b;
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 8px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+        }
+
+        .results {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .payment-item {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .success-badge {
+            background: #28a745;
+            color: white;
+        }
+
+        .failed-badge {
+            background: #dc3545;
+            color: white;
+        }
+
+        .card-info {
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 5px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+
+            .form-row,
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="test-container">
+        <h1>💳 SecurePay Database Test</h1>
+        <p>This page demonstrates the payment data storage functionality. Fill out the form below to test payment
+            processing and database storage.</p>
+
+        <div class="test-form">
+            <h3>🧪 Test Payment (Data will be stored in database)</h3>
+            <form id="testForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number:</label>
+                        <input type="text" id="cardNumber" name="cardNumber" placeholder="4111 1111 1111 1111"
+                            maxlength="19" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardholderName">Cardholder Name:</label>
+                        <input type="text" id="cardholderName" name="cardholderName" placeholder="John Doe" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiryDate">Expiry Date:</label>
+                        <input type="text" id="expiryDate" name="expiryDate" placeholder="12/25" maxlength="5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" placeholder="123 Main St" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" name="city" placeholder="New York" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="state">State:</label>
+                        <input type="text" id="state" name="state" placeholder="NY" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="zipCode">ZIP Code:</label>
+                        <input type="text" id="zipCode" name="zipCode" placeholder="10001" required>
+                    </div>
+                </div>
+
+                <button type="submit">💳 Test Payment & Store Data</button>
+            </form>
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <button onclick="loadStoredPayments()">📊 Load Stored Payments</button>
+                <button onclick="clearDatabase()">🗑️ Clear Database</button>
+            </div>
+            <div>
+                <button onclick="openAdmin()">👨‍💼 Open Admin Panel</button>
+                <button onclick="getStats()">📈 Get Statistics</button>
+            </div>
+        </div>
+
+        <div class="results" id="results">
+            <p>Click "Load Stored Payments" to see what's in the database...</p>
+        </div>
+    </div>
+
+    <script>
+        // Format card number input
+        document.getElementById('cardNumber').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = '';
+
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+
+            e.target.value = formattedValue;
+        });
+
+        // Format expiry date
+        document.getElementById('expiryDate').addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+
+            e.target.value = value;
+        });
+
+        // Format CVV
+        document.getElementById('cvv').addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+
+        // Handle test form submission
+        document.getElementById('testForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = {
+                cardNumber: document.getElementById('cardNumber').value.replace(/\s/g, ''),
+                cardholderName: document.getElementById('cardholderName').value,
+                expiryDate: document.getElementById('expiryDate').value,
+                cvv: document.getElementById('cvv').value,
+                email: document.getElementById('email').value,
+                address: document.getElementById('address').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                zipCode: document.getElementById('zipCode').value,
+                amount: 31.49,
+                cardType: detectCardType(document.getElementById('cardNumber').value.replace(/\s/g, ''))
+            };
+
+            const results = document.getElementById('results');
+            results.innerHTML = '<p>⏳ Processing payment...</p>';
+
+            try {
+                const response = await fetch('/api/payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    results.innerHTML = `
+                        <p class="success">✅ Payment successful! Data stored in database.</p>
+                        <div class="payment-item">
+                            <strong>Transaction ID:</strong> ${data.transactionId}<br>
+                            <strong>Email:</strong> ${formData.email}<br>
+                            <strong>Card:</strong> ${data.maskedCardNumber}<br>
+                            <strong>Amount:</strong> $${formData.amount}<br>
+                            <strong>Timestamp:</strong> ${new Date().toLocaleString()}
+                        </div>
+                    `;
+                } else {
+                    results.innerHTML = `<p class="error">❌ Payment failed: ${data.message}</p>`;
+                }
+            } catch (error) {
+                results.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        });
+
+        // Detect card type
+        function detectCardType(number) {
+            const patterns = {
+                visa: /^4/,
+                mastercard: /^5[1-5]|^2[2-7]/,
+                amex: /^3[47]/,
+                discover: /^6(?:011|5)/
+            };
+
+            for (const [type, pattern] of Object.entries(patterns)) {
+                if (pattern.test(number)) {
+                    return type;
+                }
+            }
+            return 'unknown';
+        }
+
+        // Load and display stored payments
+        async function loadStoredPayments() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<p>⏳ Loading stored payments...</p>';
+
+            try {
+                const response = await fetch('/api/payments');
+                const data = await response.json();
+
+                if (data.success) {
+                    if (data.payments.length === 0) {
+                        results.innerHTML = '<p>📭 No payments stored yet. Try making a test payment first!</p>';
+                    } else {
+                        let html = `<h3>📊 Stored Payments (${data.payments.length} total)</h3>`;
+
+                        data.payments.forEach((payment, index) => {
+                            const statusBadge = payment.success
+                                ? '<span class="badge success-badge">✅ Success</span>'
+                                : '<span class="badge failed-badge">❌ Failed</span>';
+
+                            html += `
+                                <div class="payment-item">
+                                    <strong>#${index + 1}</strong> ${statusBadge}<br>
+                                    <strong>Email:</strong> ${payment.email}<br>
+                                    <div class="card-info">
+                                        <strong>Card:</strong> ${payment.maskedCardNumber}<br>
+                                        <strong>Name:</strong> ${payment.cardholderName}<br>
+                                        <strong>Type:</strong> ${payment.cardType?.toUpperCase() || 'Unknown'}
+                                    </div>
+                                    <strong>Amount:</strong> $${payment.amount}<br>
+                                    <strong>Transaction ID:</strong> ${payment.transactionId}<br>
+                                    <strong>Time:</strong> ${new Date(payment.timestamp).toLocaleString()}<br>
+                                    <strong>IP:</strong> ${payment.ip || 'N/A'}
+                                </div>
+                            `;
+                        });
+
+                        results.innerHTML = html;
+                    }
+                } else {
+                    results.innerHTML = `<p class="error">❌ Error loading payments: ${data.message}</p>`;
+                }
+            } catch (error) {
+                results.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        }
+
+        // Get statistics
+        async function getStats() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<p>⏳ Loading statistics...</p>';
+
+            try {
+                const response = await fetch('/api/payment-stats');
+                const data = await response.json();
+
+                if (data.success) {
+                    const stats = data.stats;
+                    results.innerHTML = `
+                        <h3>📈 Payment Statistics</h3>
+                        <div class="payment-item">
+                            <strong>Total Transactions:</strong> ${stats.totalTransactions}<br>
+                            <strong>Successful Payments:</strong> ${stats.successfulPayments}<br>
+                            <strong>Failed Payments:</strong> ${stats.failedPayments}<br>
+                            <strong>Success Rate:</strong> ${stats.successRate}%<br>
+                            <strong>Total Revenue:</strong> $${stats.totalAmount}<br>
+                            <strong>Unique Customers:</strong> ${stats.uniqueCustomers}<br>
+                            <strong>Last Payment:</strong> ${stats.lastPayment ? new Date(stats.lastPayment).toLocaleString() : 'Never'}
+                        </div>
+                    `;
+                } else {
+                    results.innerHTML = `<p class="error">❌ Error loading stats: ${data.message}</p>`;
+                }
+            } catch (error) {
+                results.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+            }
+        }
+
+        // Clear database
+        async function clearDatabase() {
+            if (confirm('Are you sure you want to clear all stored payment data?')) {
+                const results = document.getElementById('results');
+                results.innerHTML = '<p>⏳ Clearing database...</p>';
+
+                try {
+                    const response = await fetch('/api/payments', {
+                        method: 'DELETE'
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        results.innerHTML = '<p class="success">✅ Database cleared successfully!</p>';
+                    } else {
+                        results.innerHTML = `<p class="error">❌ Error: ${data.message}</p>`;
+                    }
+                } catch (error) {
+                    results.innerHTML = `<p class="error">❌ Error: ${error.message}</p>`;
+                }
+            }
+        }
+
+        // Open admin panel
+        function openAdmin() {
+            window.open('/admin', '_blank');
+        }
+
+        // Load payments on page load
+        window.addEventListener('load', () => {
+            loadStoredPayments();
+        });
+    </script>
+</body>
+
+</html>
