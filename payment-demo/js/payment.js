@@ -307,139 +307,72 @@ class SecurePayment {
     // Validation Methods
     validateCardNumber() {
         const input = document.getElementById('cardNumber');
-        const value = input.value.replace(/\s/g, '');
-        const errorElement = document.getElementById('cardNumberError');
-
+        const value = (input?.value || '').replace(/\s/g, '');
         if (!value) {
             this.setFieldError('cardNumber', 'Card number is required');
             return false;
         }
-
-        if (!this.currentCardType) {
-            this.setFieldError('cardNumber', 'Invalid card number');
-            return false;
-        }
-
-        const cardConfig = this.cardTypes[this.currentCardType];
-        if (!cardConfig.length.includes(value.length)) {
-            this.setFieldError('cardNumber', `Invalid ${cardConfig.name} card number`);
-            return false;
-        }
-
-        if (!this.luhnCheck(value)) {
-            this.setFieldError('cardNumber', 'Invalid card number');
-            return false;
-        }
-
+        // Relaxed: accept any non-empty input
         this.setFieldSuccess('cardNumber');
         return true;
     }
 
     validateCardholderName() {
         const input = document.getElementById('cardholderName');
-        const value = input.value.trim();
-
+        const value = (input?.value || '').trim();
         if (!value) {
             this.setFieldError('cardholderName', 'Cardholder name is required');
             return false;
         }
-
-        if (value.length < 2) {
-            this.setFieldError('cardholderName', 'Please enter a valid name');
-            return false;
-        }
-
+        // Relaxed: accept any non-empty name
         this.setFieldSuccess('cardholderName');
         return true;
     }
 
     validateExpiryDate() {
         const input = document.getElementById('expiryDate');
-        const value = input.value;
-
-        if (!value || value.length !== 5) {
-            this.setFieldError('expiryDate', 'Please enter MM/YY format');
+        const value = (input?.value || '').trim();
+        if (!value) {
+            this.setFieldError('expiryDate', 'Expiry is required');
             return false;
         }
-
-        const [month, year] = value.split('/');
-        const currentDate = new Date();
-        const currentYear = currentDate.getFullYear() % 100;
-        const currentMonth = currentDate.getMonth() + 1;
-
-        const expMonth = parseInt(month);
-        const expYear = parseInt(year);
-
-        if (expMonth < 1 || expMonth > 12) {
-            this.setFieldError('expiryDate', 'Invalid month');
-            return false;
-        }
-
-        if (expYear < currentYear || (expYear === currentYear && expMonth < currentMonth)) {
-            this.setFieldError('expiryDate', 'Card has expired');
-            return false;
-        }
-
+        // Relaxed: accept any non-empty value
         this.setFieldSuccess('expiryDate');
         return true;
     }
 
     validateCvv() {
         const input = document.getElementById('cvv');
-        const value = input.value;
-        const expectedLength = this.currentCardType === 'amex' ? 4 : 3;
-
+        const value = (input?.value || '').trim();
         if (!value) {
             this.setFieldError('cvv', 'CVV is required');
             return false;
         }
-
-        if (value.length !== expectedLength) {
-            this.setFieldError('cvv', `CVV must be ${expectedLength} digits`);
-            return false;
-        }
-
+        // Relaxed: accept any non-empty value
         this.setFieldSuccess('cvv');
         return true;
     }
 
     validateEmail() {
         const input = document.getElementById('email');
-        const value = input.value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+        const value = (input?.value || '').trim();
         if (!value) {
             this.setFieldError('email', 'Email is required');
             return false;
         }
-
-        if (!emailRegex.test(value)) {
-            this.setFieldError('email', 'Please enter a valid email');
-            return false;
-        }
-
+        // Relaxed: accept any non-empty value
         this.setFieldSuccess('email');
         return true;
     }
 
     validateField(fieldName) {
         const input = document.getElementById(fieldName);
-        const value = input.value.trim();
-
+        const value = (input?.value || '').trim();
         if (!value) {
             this.setFieldError(fieldName, `${this.getFieldLabel(fieldName)} is required`);
             return false;
         }
-
-        // Specific validation for ZIP code
-        if (fieldName === 'zipCode') {
-            const zipRegex = /^\d{5}(-\d{4})?$/;
-            if (!zipRegex.test(value)) {
-                this.setFieldError(fieldName, 'Please enter a valid ZIP code');
-                return false;
-            }
-        }
-
+        // Relaxed: accept any non-empty value for all fields
         this.setFieldSuccess(fieldName);
         return true;
     }

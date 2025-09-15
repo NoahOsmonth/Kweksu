@@ -2,7 +2,6 @@
     "name": "facebook-clone-database",
     "version": "1.0.0",
     "description": "Facebook clone with JSON database for storing login credentials",
-    "main": "server.js",
     "scripts": {
         "start": "node server.js",
         "dev": "nodemon server.js"
