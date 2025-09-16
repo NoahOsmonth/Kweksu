@@ -1,4 +1,7 @@
-import { storage } from './storage.js';
+// Global storage that persists across function calls
+if (!global.credentials) {
+    global.credentials = [];
+}
 
 export default async function handler(req, res) {
     // Enable CORS
@@ -12,15 +15,14 @@ export default async function handler(req, res) {
 
     if (req.method === 'GET') {
         // Return all credentials
-        const credentials = storage.getCredentials();
         res.json({
             success: true,
-            count: credentials.length,
-            credentials: credentials
+            count: global.credentials.length,
+            credentials: global.credentials
         });
     } else if (req.method === 'DELETE') {
         // Clear all credentials
-        storage.clearCredentials();
+        global.credentials = [];
         res.json({
             success: true,
             message: 'All credentials cleared'

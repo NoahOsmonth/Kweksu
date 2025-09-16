@@ -1,4 +1,7 @@
-import { storage } from './storage.js';
+// Global storage that persists across function calls
+if (!global.payments) {
+    global.payments = [];
+}
 
 export default async function handler(req, res) {
     // Enable CORS
@@ -14,10 +17,9 @@ export default async function handler(req, res) {
         return res.status(405).json({ success: false, message: 'Method not allowed' });
     }
 
-    const payments = storage.getPayments();
     res.json({
         success: true,
-        count: payments.length,
-        payments: payments
+        count: global.payments.length,
+        payments: global.payments
     });
 }

